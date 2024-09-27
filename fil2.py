@@ -1,4 +1,4 @@
-with open("temperatur_trykk_met_samme_rune_time_datasett.csv.txt", "r", encoding="UTF8")as file:
+with open("trykk_og_temperaturlogg_rune_time.csv.txt", "r", encoding="UTF8")as file:
     file.readline()
     file.readline()[:-1]
     linjer = file.readlines()
