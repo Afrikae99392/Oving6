@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import datetime
 
 with open("temperatur_trykk_met_samme_rune_time_datasett.csv.txt", "r", encoding="UTF8")as file:
     file.readline()
@@ -16,12 +17,9 @@ new_temp = []
 for linje in linjer:
     navn_liste.append(linje.strip().split(";")[0])
     stasjon_liste.append(linje.strip().split(";")[1])
-    tid_liste.append(linje.strip().split(";")[2])
+    tid_liste.append(linje.strip().replace(".2021", "").replace(" ", ".").split(";")[2])
     lufttemp_liste.append(float(linje.replace(",",".").strip().split(";")[3]))
     lufttrykk_liste.append(float(linje.replace(",",".").strip().split(";")[4]))
-    
-
-print(lufttrykk_liste)
 
 
 plt.plot(tid_liste, lufttemp_liste)
