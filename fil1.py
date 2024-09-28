@@ -17,12 +17,13 @@ new_temp = []
 for linje in linjer:
     navn_liste.append(linje.strip().split(";")[0])
     stasjon_liste.append(linje.strip().split(";")[1])
-    tid_liste.append(linje.strip().replace(".2021", "").replace(" ", ".").split(";")[2])
+    tid_liste.append(linje.split(";")[2])
     lufttemp_liste.append(float(linje.replace(",",".").strip().split(";")[3]))
     lufttrykk_liste.append(float(linje.replace(",",".").strip().split(";")[4]))
 
+nytid = []
+for x in tid_liste:
+    nytid.append(datetime.datetime.strptime(x, "%d.%m.%Y %H:%M"))
 
-plt.plot(tid_liste, lufttemp_liste)
-plt.legend()
+plt.plot(nytid, lufttemp_liste)
 plt.show()
-
