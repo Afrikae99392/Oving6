@@ -15,34 +15,35 @@ temp_liste = []
 for linje in linjer:
     tid_liste.append(linje.split(";")[0])
     tid_siden_start_liste.append(linje.split(";")[1])
-    trykk_liste.append(linje.split(";")[2])
-    abs_trykk_liste.append(linje.split(";")[3])
-    temp_liste.append(linje.split(";")[4])
+    trykk_liste.append((linje.strip().split(";")[2]))
+    abs_trykk_liste.append(float(linje.replace(",", ".").strip().split(";")[3]))
+    temp_liste.append(float(linje.replace(",", ".").strip().split(";")[4]))
 
 
 plot_tid1 = []
 plot_tid2 = []
 pm_og_am = []
+plot_final = []
 
 for x in tid_liste:
-    if x[-2:] == "am" and x[11:13] == "00":
+    if x[-2:] == "pm":
         y = x[0:11] + "12" + x[13:19]
-        pm_og_am.append(y)
+        pm_og_am.append(datetime.datetime.strptime(y, "%m/%d/%Y %H:%M:%S"))
 
-    elif x[-2:] == "pm":
-        pm_og_am.append(x[0:19])
+    elif x[-2:] == "am":
+        pm_og_am.append(datetime.datetime.strptime(x[0:19], "%m/%d/%Y %H:%M:%S"))
 
-    else:
+    elif x[-2:] != "am" and x[-2:] != "pm":
         plot_tid1.append(x)
 
+    else:
+        print(x)
+
+for x in plot_tid1:
+    plot_final.append(datetime.datetime.strptime(x, "%m.%d.%Y %H:%M"))
+
 for x in pm_og_am:
-    plot_tid2.append(datetime.datetime.strptime(x, "%m/%d/%Y %I:%M:%S"))
+    plot_final.append(x)
 
-
-
-for x in plot_tid2:
-    plot_tid1.append(x)
-
-print(len(trykk_liste), len(plot_tid1))
-print(pm_og_am)
-"""plt.plot(plot_tid1, trykk_liste)"""
+plt.plot(plot_final, temp_liste)
+plt.show()
