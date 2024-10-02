@@ -25,5 +25,5 @@ nytid = []
 for x in tid_liste:
     nytid.append(datetime.datetime.strptime(x, "%d.%m.%Y %H:%M"))
 
-plt.plot(nytid, lufttemp_liste)
+plt.plot(nytid, lufttrykk_liste)
 plt.show()
