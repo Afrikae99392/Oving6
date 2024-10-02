@@ -1,0 +1,32 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Function to calculate the moving average
+def moving_average(timestamps, temperatures, n):
+    avg_temps = []
+    valid_times = []
+
+    for i in range(n, len(temperatures) - n):
+        avg = sum(temperatures[i - n:i + n + 1]) / (2 * n + 1)  # Calculate average of 2n+1 values
+        avg_temps.append(avg)
+        valid_times.append(timestamps[i])
+
+    return valid_times, avg_temps
+
+# Sample data: replace this with your actual data
+timestamps = np.linspace(0, 100, 500)  # Fake time data
+temperatures = np.sin(timestamps / 10) + np.random.normal(0, 0.1, 500)  # Fake temperature data
+
+# Set the window size for the moving average
+n = 30
+
+# Get the moving average
+valid_times, avg_temps = moving_average(timestamps, temperatures, n)
+
+# Plot the original and smoothed temperatures
+plt.plot(timestamps, temperatures, label="Original Temperatures", color="blue")
+plt.plot(valid_times, avg_temps, label="Moving Average", color="orange")
+plt.xlabel("Time")
+plt.ylabel("Temperature")
+plt.legend()
+plt.show()
