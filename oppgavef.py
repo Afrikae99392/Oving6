@@ -66,7 +66,7 @@ nytid = []
 for x in tid_liste2:
     nytid.append(datetime.datetime.strptime(x, "%d.%m.%Y %H:%M"))
 
-plt.plot(plot_final, temp_liste, label = "Tempraturer fra Uis", color = "blue")
+plt.plot(plot_final, temp_liste, label = "Tempraturer fra UiS", color = "blue")
 plt.plot(nytid, lufttemp_liste, label = "Tempraturer fra Sola værstasjon", color = "red")
 plt.xlabel("Tid")
 plt.ylabel("Tempratur")
