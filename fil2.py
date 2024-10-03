@@ -26,11 +26,10 @@ pm_og_am = []
 plot_final = []
 
 for x in tid_liste:
-    if x[-2:] == "pm":
-        y = x[0:11] + "12" + x[13:19]
-        pm_og_am.append(datetime.datetime.strptime(y, "%m/%d/%Y %H:%M:%S"))
+    if x[-2:] == "pm" and x[11:12] != "12":
+        pm_og_am.append(datetime.datetime.strptime(x, "%m/%d/%Y %I:%M:%S %p"))
 
-    elif x[-2:] == "am":
+    elif x[-2:] == "am" or x[-2:] == "pm":
         pm_og_am.append(datetime.datetime.strptime(x[0:19], "%m/%d/%Y %H:%M:%S"))
 
     elif x[-2:] != "am" and x[-2:] != "pm":
