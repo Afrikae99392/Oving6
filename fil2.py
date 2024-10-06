@@ -21,7 +21,6 @@ for linje in linjer:
 
 
 plot_tid1 = []
-plot_tid2 = []
 pm_og_am = []
 plot_final = []
 
