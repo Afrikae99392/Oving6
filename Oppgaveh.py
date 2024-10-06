@@ -40,6 +40,8 @@ for x in tid_liste:
         
     elif x == "06.12.2021 03:05":
         print(teller, x)
+        break
+    
     teller += 1
 # Indeksen på tidintervallet er 1127, og 4569 fordi det er fra første 6.11.2021 17:31 til første indeks av 6.12.2021 03:05    
     
@@ -67,9 +69,8 @@ for x in plot_tid1:
 for x in pm_og_am:
     plot_final.append(x)
 
-plt.plot(plot_final, temp_liste, color = "purple")
-plt.plot(nytid3, y, color = "red")
+plt.plot(plot_final, temp_liste, label = "Tempratur fra UiS værstasjon", color = "purple")
+plt.plot(nytid3, y, label = "Gjennomsnittlig tempraturfall på intervall", color = "red")
 
+plt.legend()
 plt.show()
-
-print(temp_liste[4569], temp_liste[1127])
