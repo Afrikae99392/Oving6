@@ -25,7 +25,7 @@ pm_og_am = []
 plot_final = []
 
 for x in tid_liste:
-    if x[-2:] == "pm" and x[11:12] != "12":
+    if x[-2:] == "pm" and x[11:12] != "12" :
         pm_og_am.append(datetime.datetime.strptime(x, "%m/%d/%Y %I:%M:%S %p"))
 
     elif x[-2:] == "am" or x[-2:] == "pm":
@@ -43,5 +43,5 @@ for x in plot_tid1:
 for x in pm_og_am:
     plot_final.append(x)
 
-plt.plot(plot_final, temp_liste)
+plt.plot(plot_final, abs_trykk_liste)
 plt.show()
