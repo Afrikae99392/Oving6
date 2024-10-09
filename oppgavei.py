@@ -101,8 +101,9 @@ nytid = []
 for x in tid_liste_sola:
     nytid.append(datetime.datetime.strptime(x, "%d.%m.%Y %H:%M"))
 
-plt.plot(nytid, lufttrykk_liste)
-plt.plot(plot_final, abs_trykk_liste)
+plt.plot(nytid, lufttrykk_liste, label = "Absolutttrykk MEI")
+plt.plot(plot_final, abs_trykk_liste, label = "Absolutt trykk UiS")
+plt.plot(plot_tidfinal, trykkbar_liste, label = "Barometisk trykk")
 
-plt.plot(plot_tidfinal, trykkbar_liste)
+plt.legend()
 plt.show()
