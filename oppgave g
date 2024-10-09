@@ -8,7 +8,6 @@ def calculate_moving_average(times, temperatures, n):
     
    
     for i in range(n, len(temperatures) - n):
-        # Append valid times (those that won't go out of bounds)
         valid_times.append(times[i])
         
         
