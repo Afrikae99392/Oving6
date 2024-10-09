@@ -20,6 +20,7 @@ for linje in linjer:
     temp_liste.append(float(linje.replace(",", ".").strip().split(";")[4]))
 
 
+
 plot_tid1 = []
 pm_og_am = []
 plot_final = []
