@@ -27,7 +27,7 @@ lufttrykk_liste = []
 
 
 for linje in linjer:
-    tid_liste_uis2.append(linje.split(";")[0])
+    tid_liste_uis.append(linje.split(";")[0])
     tid_siden_start_liste.append(linje.split(";")[1])
     trykk_liste.append(linje.replace(",", ".").strip().split(";")[2])
     abs_trykk_liste.append(float(linje.replace(",", ".").strip().split(";")[3]) * 10)
@@ -51,9 +51,9 @@ trykkbar_liste = []
 for linje in linjer:
     if linje.split(";")[2] != "":
         trykkbar_liste.append(float(linje.replace(",", ".").split(";")[2]) * 10)
-        tid_liste_uis.append(linje.split(";")[0]) 
+        tid_liste_uis2.append(linje.split(";")[0]) 
 
-for x in tid_liste_uis:
+for x in tid_liste_uis2:
     if x[-2:] == "pm":
         pm_og_am.append(x)
 
@@ -78,7 +78,7 @@ plot_tid1 = []
 pm_og_am = []
 plot_final = []
 
-for x in tid_liste_uis2:
+for x in tid_liste_uis:
     if x[-2:] == "pm" and x[11:12] != "12" :
         pm_og_am.append(datetime.datetime.strptime(x, "%m/%d/%Y %I:%M:%S %p"))
 
