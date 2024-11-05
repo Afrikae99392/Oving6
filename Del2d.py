@@ -17,9 +17,6 @@ temperatur_sirdal = []
 trykket_sauda = []
 trykket_sirdal = []
 
-
-
-
 for linje in linjer3:
     if len(linje.split(";")[0]) > 5:
         liste_sirdal.append(linje.strip().split(";")[0])
@@ -34,7 +31,6 @@ for linje in linjer3:
         tid_sauda.append(linje.strip().split(";")[2])
         temperatur_sauda.append(float(linje.replace(",", ".").strip().split(";")[3]))
         trykket_sauda.append(float(linje.replace(",", ".").strip().split(";")[4]))
-
 
 plot_tid_sauda = []
 plot_tid_sirdal = []
