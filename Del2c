@@ -1,0 +1,57 @@
+import matplotlib.pyplot as plt
+import datetime
+import matplotlib.dates as mdates
+
+with open("trykk_og_temperaturlogg_rune_time.csv.txt", "r", encoding="UTF8") as f:
+    f.readline()  
+    linjer = f.readlines()
+
+tid_liste = []
+abs_trykk_liste = []
+trykkbar_liste = []
+
+for linje in linjer:
+    split_line = linje.split(";")
+    try:
+        time_str = split_line[0]
+        abs_trykk = float(split_line[3].replace(",", "."))
+        trykkbar = split_line[2].strip()
+        
+        if trykkbar:
+            trykkbar = float(trykkbar.replace(",", ".")) * 10  
+            abs_trykk_liste.append(abs_trykk)
+            trykkbar_liste.append(trykkbar)
+            tid_liste.append(datetime.datetime.strptime(time_str, "%m.%d.%Y %H:%M"))
+    except (ValueError, IndexError):
+        continue  
+
+if len(abs_trykk_liste) != len(trykkbar_liste) or len(abs_trykk_liste) != len(tid_liste):
+    min_length = min(len(abs_trykk_liste), len(trykkbar_liste), len(tid_liste))
+    abs_trykk_liste = abs_trykk_liste[:min_length]
+    trykkbar_liste = trykkbar_liste[:min_length]
+    tid_liste = tid_liste[:min_length]
+
+differanse_trykk = [abs_val - bar_val for abs_val, bar_val in zip(abs_trykk_liste, trykkbar_liste)]
+
+smoothed_diff = []
+window_size = 10
+for i in range(len(differanse_trykk)):
+    start_index = max(0, i - window_size)
+    end_index = min(len(differanse_trykk), i + window_size + 1)
+    
+    window_avg = sum(differanse_trykk[start_index:end_index]) / (end_index - start_index)
+    smoothed_diff.append(window_avg)
+
+fig, ax = plt.subplots()
+ax.plot(tid_liste, smoothed_diff, label="Utjevnede trykkdifferanser", color="orange")
+ax.set_xlabel("Tid")
+ax.set_ylabel("Trykkdifferanse (hPa)")
+ax.set_title("Smoothed Difference Between Absolute and Barometric Pressure")
+
+ax.xaxis.set_major_locator(mdates.AutoDateLocator())
+ax.xaxis.set_major_formatter(mdates.DateFormatter("%m-%d %H:%M"))
+plt.xticks(rotation=45)
+
+ax.legend()
+plt.tight_layout() 
+plt.show()
